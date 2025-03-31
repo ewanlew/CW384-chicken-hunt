@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2de3db6108b0644449dfd4f13a2945b7
+guid: 5a4d4557a31835b4fa95f40c765f7fc2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3263184547589388288
-    second: sky-temp-bg_0
+      213: 8763634697419604438
+    second: red-single-chicken-png-8_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sky-temp-bg_0
+      name: red-single-chicken-png-8_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 7762
-        height: 5177
+        y: 4
+        width: 302
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 008046c61f6d6b2d0800000000000000
-      internalID: -3263184547589388288
+      spriteID: 6d1cbf8535fae9970800000000000000
+      internalID: 8763634697419604438
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      red-single-chicken-png-8_0: 8763634697419604438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
