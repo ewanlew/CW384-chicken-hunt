@@ -5,7 +5,7 @@ using System.Collections;
 public class Countdown : MonoBehaviour
 {
     public TextMeshProUGUI countdownText;
-    // public GameObject spawner;
+    public GameObject spawner;
 
     void Start()
     {
@@ -26,6 +26,6 @@ public class Countdown : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
 
-        // spawner.SetActive(true); // Begin spawning
+        spawner.SetActive(true); // Begin spawning
     }
 }
