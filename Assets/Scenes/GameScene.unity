@@ -585,6 +585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countdownText: {fileID: 668810965}
   spawner: {fileID: 1966536995}
+  countdownTime: 3
 --- !u!1 &1360452414
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +735,14 @@ MonoBehaviour:
   chickenPrefab: {fileID: 5186802550757877712, guid: 57a2a420326b8ed43a9e2f670adbb1fa, type: 3}
   spawnInterval: 3
   scrollRange: 3
+  baseXVelocity: 0.8
+  minXOffset: -1
+  maxXOffset: 1
+  minYOffset: 10
+  maxYOffset: 15
+  minSpin: -5
+  maxSpin: 5
+  chickenLifespanSecs: 12
 --- !u!1 &2096160560
 GameObject:
   m_ObjectHideFlags: 0

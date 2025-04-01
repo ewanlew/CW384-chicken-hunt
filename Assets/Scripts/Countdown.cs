@@ -7,6 +7,8 @@ public class Countdown : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public GameObject spawner;
 
+    public int countdownTime = 3;
+
     void Start()
     {
         StartCoroutine(CountdownRoutine());
@@ -14,12 +16,12 @@ public class Countdown : MonoBehaviour
 
     IEnumerator CountdownRoutine()
     {
-        int count = 3;
-        while (count > 0)
+        int countdownTime = 3;
+        while (countdownTime > 0)
         {
-            countdownText.text = "Starting in " + count.ToString() + "...";
+            countdownText.text = "Starting in " + countdownTime.ToString() + "...";
             yield return new WaitForSeconds(1f);
-            count--;
+            countdownTime--;
         }
 
         countdownText.text = "Begin! :D";
