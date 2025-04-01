@@ -18,8 +18,6 @@ public class ChickenSpawner : MonoBehaviour
 
     void SpawnChicken()
     {
-        float screenBottomY = -6f;
-
         // range of spawn
         float camHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
         float spawnX = Camera.main.transform.position.x + Random.Range(-camHalfWidth - scrollRange, camHalfWidth + scrollRange);
@@ -32,8 +30,12 @@ public class ChickenSpawner : MonoBehaviour
         float xVelocity = (toCenter * 0.3f) + Random.Range(-1f, 1f);
         float yVelocity = Random.Range(5f, 8f);
 
-        // init velocity upward -> centre
-        chicken.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(xVelocity, yVelocity);
+        // applies vector + rotation
+        Rigidbody2D rb = chicken.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+
+        float spin = Random.Range(-5f, 5f);
+        rb.AddTorque(spin, ForceMode2D.Impulse);
 
         // KILL chicken after a lil
         Destroy(chicken, 12f);
