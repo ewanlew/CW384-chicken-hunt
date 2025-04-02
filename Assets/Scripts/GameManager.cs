@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     void Awake() {
         if (Instance == null) {
             Instance = this;
+            UpdateUI();
         } else {
             Destroy(gameObject);
         }
@@ -30,9 +31,5 @@ public class GameManager : MonoBehaviour
     void UpdateUI()
     {
         scoreText.text = "Score: " + score;
-    }
-
-    void Start(){
-        AddScore(1);
     }
 }
