@@ -4,6 +4,8 @@ public class PlayerShooter : MonoBehaviour
 {
     void Update()
     {
+        if (Time.timeScale == 0f) return;
+        
         if (Input.GetMouseButtonDown(0)){
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
