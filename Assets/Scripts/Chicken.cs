@@ -12,9 +12,12 @@ public class Chicken : MonoBehaviour
             GameManager.Instance.AddScore(1);
             StartCoroutine(HitAnimation());
             Debug.Log("hit!");
-        } else {
-            GameManager.Instance.Miss();
+        } else if (distance <= killRadius * 2f) {
+            GameManager.Instance.Miss(true);
             Debug.Log("close but missed...");
+        } else {
+            GameManager.Instance.Miss(false);
+            Debug.Log("missed completely...");
         }
     }
 
