@@ -5,6 +5,13 @@ public class Chicken : MonoBehaviour
 {
     public float killRadius = 0.5f;
 
+    void Update() {
+        if (transform.position.y < -6f) {
+            GameManager.Instance.Miss(false);
+            Destroy(gameObject);
+        }
+    }
+
     public void TryHit(Vector2 clickPosition) { 
         float distance = Vector2.Distance(transform.position, clickPosition);
 
