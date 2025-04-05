@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText;
 
-    public float lives = 3f;
+    public float lives = 2f;
     public TextMeshProUGUI livesText;
     public GameObject gameOverPanel;
     public TextMeshProUGUI finalScoreText;
@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     void Awake() {
         if (Instance == null) {
             Instance = this;
-            UpdateUI();
         } else {
             Destroy(gameObject);
         }
@@ -47,7 +46,6 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    // Update is called once per frame
     void UpdateUI()
     {
         livesText.text = "Lives: " + lives.ToString("0.0");
@@ -57,13 +55,14 @@ public class GameManager : MonoBehaviour
     void GameOver() {
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
-        finalScoreText.text = "Final Score: " + score +", good job! :)";
+        finalScoreText.text = "Final Score: " + score;
     }
 
     public void Replay() {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 
     public void ReturnToMenu() {
         Time.timeScale = 1f;
