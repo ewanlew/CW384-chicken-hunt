@@ -4,10 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject SettingsMenu;
-
     void Start() {
-        SettingsMenu.SetActive(false);
     }
 
     public void PlayGame() {
