@@ -93,7 +93,7 @@ public class ToggleSwitch : MonoBehaviour, IPointerClickHandler
         }
         
         
-        private void SetStateAndStartAnimation(bool state)
+        public void SetStateAndStartAnimation(bool state)
         {
             _previousValue = CurrentValue;
             CurrentValue = state;
