@@ -3830,13 +3830,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1960537264}
   m_HandleRect: {fileID: 1577616986}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 240
+  m_MinValue: 30
+  m_MaxValue: 360
   m_WholeNumbers: 1
-  m_Value: 60
+  m_Value: 36
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1608529431}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: OnFPSCapChanged
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &628898190
 GameObject:
   m_ObjectHideFlags: 0
@@ -4528,10 +4540,34 @@ MonoBehaviour:
     m_RotationOrder: 4
   onToggleOn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1608529431}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: OnLimitFPSChanged
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onToggleOff:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1608529431}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: OnLimitFPSChanged
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &787833653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5703,7 +5739,6 @@ GameObject:
   - component: {fileID: 1138460851}
   - component: {fileID: 1138460853}
   - component: {fileID: 1138460852}
-  - component: {fileID: 1138460854}
   m_Layer: 5
   m_Name: fpsText
   m_TagString: Untagged
@@ -5829,19 +5864,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138460850}
   m_CullTransparentMesh: 1
---- !u!114 &1138460854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138460850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f324eedc3a646ce48817eae8e2b3c866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fpsText: {fileID: 1138460852}
 --- !u!1 &1147419494
 GameObject:
   m_ObjectHideFlags: 0
@@ -6869,6 +6891,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372477632}
   m_CullTransparentMesh: 1
+--- !u!1 &1381789304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1381789307}
+  - component: {fileID: 1381789306}
+  - component: {fileID: 1381789305}
+  m_Layer: 0
+  m_Name: FramerateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1381789305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381789304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31237ca5cc80f454ebc86adee729568f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1381789306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381789304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f324eedc3a646ce48817eae8e2b3c866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fpsText: {fileID: 1138460852}
+--- !u!4 &1381789307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381789304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 429.54388, y: 311.07162, z: -3.2017057}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392566006
 GameObject:
   m_ObjectHideFlags: 0
@@ -8894,6 +8974,9 @@ MonoBehaviour:
   fullscreenToggle: {fileID: 1481968272}
   resolutionDropdown: {fileID: 1435915216}
   showFPSToggle: {fileID: 1820297172}
+  capFPSToggle: {fileID: 787833652}
+  framerateLimiter: {fileID: 1381789305}
+  fpsCapSlider: {fileID: 619908324}
 --- !u!4 &1608529432
 Transform:
   m_ObjectHideFlags: 0
@@ -11506,3 +11589,4 @@ SceneRoots:
   - {fileID: 994505444}
   - {fileID: 1985074140}
   - {fileID: 1608529432}
+  - {fileID: 1381789307}

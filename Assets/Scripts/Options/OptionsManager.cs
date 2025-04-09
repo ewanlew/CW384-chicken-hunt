@@ -21,6 +21,9 @@ public class OptionsManager : MonoBehaviour
     public ToggleSwitch fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
     public ToggleSwitch showFPSToggle;
+    public ToggleSwitch capFPSToggle;
+    public FramerateLimiter framerateLimiter;
+    public Slider fpsCapSlider;
 
     private void Start() {
         // AUDIO
@@ -52,6 +55,14 @@ public class OptionsManager : MonoBehaviour
 
         bool showFPS = PlayerPrefs.GetInt("ShowFPS", 0) == 1;
         showFPSToggle.SetStateAndStartAnimation(showFPS);
+
+        bool capFPS = PlayerPrefs.GetInt("LimitFPS", 0) == 1;
+        capFPSToggle.SetStateAndStartAnimation(capFPS);
+        fpsCapSlider.interactable = capFPS;
+
+        int savedCap = PlayerPrefs.GetInt("FPSCap", 60);
+        fpsCapSlider.value = savedCap;
+        framerateLimiter.SetFPSCap(savedCap);
     }
 
     public void OnMasterVolumeChanged(float value) {
@@ -109,6 +120,16 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.Save();
         
         Debug.Log($"[OptionsManager] Display FPS set to: {isFPS}");
+    }
+
+    public void OnLimitFPSChanged(bool limit) {
+        framerateLimiter.SetLimitFPS(limit);
+        fpsCapSlider.interactable = limit;
+    }
+
+    public void OnFPSCapChanged(float val) {
+        int fps = Mathf.RoundToInt(fpsCapSlider.value);
+        framerateLimiter.SetFPSCap(fps);
     }
 
     public void Return() {
