@@ -3395,8 +3395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chickenPrefab: {fileID: 5186802550757877712, guid: 57a2a420326b8ed43a9e2f670adbb1fa, type: 3}
-  spawnInterval: 1
-  scrollRange: 3
+  warningIconPrefab: {fileID: 9137297727164793722, guid: a1ab4b0fdf2f4964bb0f3c3fc5b4e77c, type: 3}
   xSpawnPadding: 3
   baseXVelocity: 0.8
   minXOffset: -1
@@ -3405,6 +3404,8 @@ MonoBehaviour:
   maxYOffset: 15
   minSpin: -5
   maxSpin: 5
+  spawnInterval: 1
+  scrollRange: 3
   chickenLifespanSecs: 12
 --- !u!1 &2026161929
 GameObject:
@@ -3573,12 +3574,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd948403f3e5e0045aeaa0a806b60226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 1504174389}
-  lives: 2
-  livesText: {fileID: 1101485007}
   gameOverPanel: {fileID: 111332387}
+  scoreText: {fileID: 1504174389}
+  livesText: {fileID: 1101485007}
   finalScoreText: {fileID: 956503892}
+  score: 0
+  lives: 2
 --- !u!4 &2045254647
 Transform:
   m_ObjectHideFlags: 0
