@@ -4,7 +4,7 @@ using System.Collections;
 public class WarningIcon : MonoBehaviour
 {
 
-    public float fadeInDuration = 0.2f;
+    [SerializeField] private float fadeInDuration = 0.2f;
 
     private SpriteRenderer spriteRenderer;
 

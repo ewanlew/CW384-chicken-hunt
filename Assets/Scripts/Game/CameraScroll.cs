@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CameraScroll : MonoBehaviour
 {
-    public float scrollSpeed = 5f;  // scroll speed
-    public float maxOffset = 3f;    // maximum movement from start pos
+    [SerializeField] private float scrollSpeed = 5f;  // scroll speed
+    [SerializeField] private float maxOffset = 3f;    // maximum movement from start pos
 
     private float baseX;  // init x pos
 

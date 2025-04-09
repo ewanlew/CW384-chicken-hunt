@@ -8,21 +8,21 @@ public class ChickenSpawner : MonoBehaviour
     [SerializeField] private GameObject warningIconPrefab;
 
     [Header("Spawning Position")] 
-    public float xSpawnPadding = 1f;
-    public float baseXVelocity = 0.8f;
-    public float minXOffset = -1f;
-    public float maxXOffset = 1f;
+    [SerializeField] private float xSpawnPadding = 1f;
+    [SerializeField] private float baseXVelocity = 0.8f;
+    [SerializeField] private float minXOffset = -1f;
+    [SerializeField] private float maxXOffset = 1f;
 
-    public float minYOffset = 5f;
-    public float maxYOffset = 8f;
+    [SerializeField] private float minYOffset = 5f;
+    [SerializeField] private float maxYOffset = 8f;
 
-    public float minSpin = -5f;
-    public float maxSpin = 5f;
+    [SerializeField] private float minSpin = -5f;
+    [SerializeField] private float maxSpin = 5f;
 
     [Header("Game Properties")] 
-    public float spawnInterval = 3f;
-    public float scrollRange = 3f;
-    public float chickenLifespanSecs = 12f;
+    [SerializeField] private float spawnInterval = 3f;
+    [SerializeField] private float scrollRange = 3f;
+    [SerializeField] private float chickenLifespanSecs = 12f;
 
     private float nextSpawnTime;
 

@@ -4,8 +4,8 @@ using System.Collections;
 
 public class Countdown : MonoBehaviour
 {
-    public TextMeshProUGUI countdownText;
-    public GameObject spawner;
+    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private GameObject spawner;
 
     public int countdownTime = 3;
 

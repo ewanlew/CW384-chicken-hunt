@@ -6,24 +6,24 @@ using TMPro;
 public class OptionsManager : MonoBehaviour
 {
     [Header("Master Volume")] 
-    public Slider masterVolumeSlider;
-    public TextMeshProUGUI masterVolumeLabel;
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private TextMeshProUGUI masterVolumeLabel;
 
     [Header("SFX Volume")] 
-    public Slider sfxVolumeSlider;
-    public TextMeshProUGUI sfxVolumeLabel;
+    [SerializeField] private Slider sfxVolumeSlider;
+    [SerializeField] private TextMeshProUGUI sfxVolumeLabel;
 
     [Header("Music Volume")] 
-    public Slider musicVolumeSlider;
-    public TextMeshProUGUI musicVolumeLabel;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private TextMeshProUGUI musicVolumeLabel;
 
     [Header("Video Settings")]
-    public ToggleSwitch fullscreenToggle;
-    public TMP_Dropdown resolutionDropdown;
-    public ToggleSwitch showFPSToggle;
-    public ToggleSwitch capFPSToggle;
-    public FramerateLimiter framerateLimiter;
-    public Slider fpsCapSlider;
+    [SerializeField] private ToggleSwitch fullscreenToggle;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private ToggleSwitch showFPSToggle;
+    [SerializeField] private ToggleSwitch capFPSToggle;
+    [SerializeField] private FramerateLimiter framerateLimiter;
+    [SerializeField] private Slider fpsCapSlider;
 
     private void Start() {
         // AUDIO

@@ -3,7 +3,7 @@ using TMPro;
 
 public class FPSDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI fpsText;
+    [SerializeField] private TextMeshProUGUI fpsText;
 
     private float deltaTime;
     private float updateTimer;

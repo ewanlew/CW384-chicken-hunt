@@ -6,16 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameObject gameOverPanel;
+    [SerializeField] private GameObject gameOverPanel;
 
     [Header("Text Objects")] 
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI livesText;
-    public TextMeshProUGUI finalScoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI finalScoreText;
 
     [Header("Init Values")] 
-    public int score = 0;
-    public float lives = 2f;
+    [SerializeField] private int score = 0;
+    [SerializeField] private float lives = 2f;
 
     void Start() {
         UpdateUI();
