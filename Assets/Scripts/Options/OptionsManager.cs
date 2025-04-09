@@ -20,6 +20,7 @@ public class OptionsManager : MonoBehaviour
     [Header("Video Settings")]
     public ToggleSwitch fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
+    public ToggleSwitch showFPSToggle;
 
     private void Start() {
         // AUDIO
@@ -48,6 +49,9 @@ public class OptionsManager : MonoBehaviour
         int savedIndex = PlayerPrefs.GetInt("ResolutionIndex", 1);
         resolutionDropdown.value = savedIndex;
         SetResolutionFromDropdown(savedIndex);
+
+        bool showFPS = PlayerPrefs.GetInt("ShowFPS", 0) == 1;
+        showFPSToggle.SetStateAndStartAnimation(showFPS);
     }
 
     public void OnMasterVolumeChanged(float value) {
@@ -100,7 +104,12 @@ public class OptionsManager : MonoBehaviour
         Debug.Log($"[OptionsManager] Resolution set to index {index}");
     }
 
-
+    public void OnShowFPSChanged(bool isFPS) {
+        PlayerPrefs.SetInt("ShowFPS", isFPS ? 1 : 0);
+        PlayerPrefs.Save();
+        
+        Debug.Log($"[OptionsManager] Display FPS set to: {isFPS}");
+    }
 
     public void Return() {
         SceneManager.LoadScene(0);
