@@ -3,9 +3,8 @@ using UnityEngine;
 public class ChickenSpawner : MonoBehaviour
 {
     public GameObject chickenPrefab;
-    public float spawnInterval = 3f;
-    public float scrollRange = 3f;
 
+    [Header("Spawning Position")] 
     public float xSpawnPadding = 3f;
     public float baseXVelocity = 0.8f;
     public float minXOffset = -1f;
@@ -17,6 +16,9 @@ public class ChickenSpawner : MonoBehaviour
     public float minSpin = -5f;
     public float maxSpin = 5f;
 
+    [Header("Game Properties")] 
+    public float spawnInterval = 3f;
+    public float scrollRange = 3f;
     public float chickenLifespanSecs = 12f;
 
     private float nextSpawnTime;

@@ -7,7 +7,7 @@ public class FPSDisplay : MonoBehaviour
 
     private float deltaTime;
     private float updateTimer;
-    private const float updateInterval = 0.2f;
+    private const float updateInterval = 0.5f;
 
     void Update() {
         bool shouldShow = PlayerPrefs.GetInt("ShowFPS", 0) == 1;

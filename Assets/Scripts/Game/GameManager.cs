@@ -6,13 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int score = 0;
-    public TextMeshProUGUI scoreText;
-
-    public float lives = 2f;
-    public TextMeshProUGUI livesText;
     public GameObject gameOverPanel;
+
+    [Header("Text Objects")] 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
     public TextMeshProUGUI finalScoreText;
+
+    [Header("Init Values")] 
+    public int score = 0;
+    public float lives = 2f;
 
     void Start() {
         UpdateUI();
