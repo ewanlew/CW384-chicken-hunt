@@ -65,8 +65,17 @@ public class ChickenSpawner : MonoBehaviour
 
         Destroy(warning); // fade is handled separately
 
-        GameObject prefabToSpawn = Random.value <= goldenChickenChance ? goldenChickenPrefab : chickenPrefab;
+        GameObject prefabToSpawn;
+
+        // if the item bar full force normal chicken
+        if (ItemManager.Instance != null && ItemManager.Instance.IsFull()) {
+            prefabToSpawn = chickenPrefab;
+        } else {
+            prefabToSpawn = Random.value <= goldenChickenChance ? goldenChickenPrefab : chickenPrefab;
+        }
+
         GameObject chicken = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+
 
         // vector to centre w/ offset
         float toCenter = Camera.main.transform.position.x - spawnX;
