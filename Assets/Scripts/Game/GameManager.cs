@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("Init Values")] 
     [SerializeField] private int score = 0;
     [SerializeField] private float lives = 2f;
+    [SerializeField] private bool isDoublePointsActive = false;
 
     void Start() {
         UpdateUI();
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddScore(int amt){
+        if (isDoublePointsActive) { amt *= 2; }
         score += amt;
         UpdateUI();
     }
@@ -60,7 +63,36 @@ public class GameManager : MonoBehaviour
         }
 
         typingPanel.SetActive(true);
+
+        ItemType reward = (ItemType)Random.Range(0, System.Enum.GetValues(typeof(ItemType)).Length);
+
+        typingChallenge.SetRewardItem(reward);
         typingChallenge.BeginNewPrompt();
+    }
+
+    public void SlowTimeEffect() {
+        StartCoroutine(SlowTimeCoroutine());
+    }
+
+    public IEnumerator SlowTimeCoroutine() {
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(15f);
+        Time.timeScale = 1f;
+    }
+
+    public void AddLife(float amt) {
+        lives += amt;
+        UpdateUI();
+    }
+
+    public void DoublePointsEffect() {
+        StartCoroutine(DoublePointsCoroutine());
+    }
+
+    public IEnumerator DoublePointsCoroutine() {
+        isDoublePointsActive = true;
+        yield return new WaitForSecondsRealtime(10f);
+        isDoublePointsActive = false;
     }
 
     void UpdateUI()

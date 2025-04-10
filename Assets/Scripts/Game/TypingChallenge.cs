@@ -8,6 +8,7 @@ public class TypingChallenge : MonoBehaviour
     [SerializeField] private TextMeshProUGUI promptText;
     [SerializeField] private TextMeshProUGUI inputText;
 
+    private ItemType pendingReward;
     private string currentWord = "";
     private int currentIndex = 0;
     private bool challengeActive = false;
@@ -43,7 +44,7 @@ public class TypingChallenge : MonoBehaviour
 
     void ChallengeSuccess() {
         challengeActive = false;
-        // ITEM TIME
+        ItemManager.Instance.AddItem(pendingReward);
 
         EndChallenge();
     }
@@ -63,5 +64,9 @@ public class TypingChallenge : MonoBehaviour
         if (shooter != null) {
             shooter.enabled = true;
         }
+    }
+
+    public void SetRewardItem(ItemType reward) {
+        pendingReward = reward;
     }
 }
