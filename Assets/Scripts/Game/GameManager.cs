@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    [SerializeField] private TypingChallenge typingChallenge;
 
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] public GameObject typingPanel;
 
     [Header("Text Objects")] 
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -47,6 +49,18 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateUI();
+    }
+
+    public void TriggerTypingChallnge() {
+        Time.timeScale = 0f;
+
+        PlayerShooter shooter = Object.FindFirstObjectByType<PlayerShooter>();
+        if (shooter != null) {
+            shooter.enabled = false;
+        }
+
+        typingPanel.SetActive(true);
+        typingChallenge.BeginNewPrompt();
     }
 
     void UpdateUI()

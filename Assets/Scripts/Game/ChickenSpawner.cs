@@ -5,6 +5,7 @@ public class ChickenSpawner : MonoBehaviour
 {
     [Header("Prefabs")] 
     [SerializeField] private GameObject chickenPrefab;
+    [SerializeField] private GameObject goldenChickenPrefab;
     [SerializeField] private GameObject warningIconPrefab;
 
     [Header("Spawning Position")] 
@@ -23,6 +24,8 @@ public class ChickenSpawner : MonoBehaviour
     [SerializeField] private float spawnInterval = 3f;
     [SerializeField] private float scrollRange = 3f;
     [SerializeField] private float chickenLifespanSecs = 12f;
+    [SerializeField, Range(0f, 1f)] private float goldenChickenChance = 0.05f;
+
 
     private float nextSpawnTime;
 
@@ -62,7 +65,8 @@ public class ChickenSpawner : MonoBehaviour
 
         Destroy(warning); // fade is handled separately
 
-        GameObject chicken = Instantiate(chickenPrefab, spawnPos, Quaternion.identity);
+        GameObject prefabToSpawn = Random.value <= goldenChickenChance ? goldenChickenPrefab : chickenPrefab;
+        GameObject chicken = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
 
         // vector to centre w/ offset
         float toCenter = Camera.main.transform.position.x - spawnX;

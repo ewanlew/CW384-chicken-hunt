@@ -1631,6 +1631,7 @@ GameObject:
   - component: {fileID: 868249269}
   - component: {fileID: 868249271}
   - component: {fileID: 868249270}
+  - component: {fileID: 868249272}
   m_Layer: 5
   m_Name: ItemPanel
   m_TagString: Untagged
@@ -1698,6 +1699,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868249268}
   m_CullTransparentMesh: 1
+--- !u!114 &868249272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868249268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e7fa7a28d242c42af65f807bc10012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptText: {fileID: 978062809}
+  inputText: {fileID: 1295360918}
 --- !u!1 &929026508
 GameObject:
   m_ObjectHideFlags: 0
@@ -3882,6 +3897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chickenPrefab: {fileID: 5186802550757877712, guid: 57a2a420326b8ed43a9e2f670adbb1fa, type: 3}
+  goldenChickenPrefab: {fileID: 5186802550757877712, guid: 78467aa9b94d4a140a05b222e27bacea, type: 3}
   warningIconPrefab: {fileID: 9137297727164793722, guid: a1ab4b0fdf2f4964bb0f3c3fc5b4e77c, type: 3}
   xSpawnPadding: 3
   baseXVelocity: 0.8
@@ -3894,6 +3910,7 @@ MonoBehaviour:
   spawnInterval: 1
   scrollRange: 3
   chickenLifespanSecs: 12
+  goldenChickenChance: 1
 --- !u!1 &2026161929
 GameObject:
   m_ObjectHideFlags: 0
@@ -4061,7 +4078,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd948403f3e5e0045aeaa0a806b60226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingChallenge: {fileID: 868249272}
   gameOverPanel: {fileID: 111332387}
+  typingPanel: {fileID: 868249268}
   scoreText: {fileID: 1504174389}
   livesText: {fileID: 1101485007}
   finalScoreText: {fileID: 956503892}

@@ -4,6 +4,7 @@ using System.Collections;
 public class Chicken : MonoBehaviour
 {
     public float killRadius = 0.5f;
+    public bool isGolden = false;
 
     void Update() {
         if (transform.position.y < -6f) {
@@ -16,6 +17,11 @@ public class Chicken : MonoBehaviour
         float distance = Vector2.Distance(transform.position, clickPosition);
 
         if (distance <= killRadius) {
+            if (isGolden) {
+                GameManager.Instance.TriggerTypingChallnge();
+                Destroy(gameObject);
+                return;
+            }
             GameManager.Instance.AddScore(1);
             StartCoroutine(HitAnimation());
             Debug.Log("hit!");
