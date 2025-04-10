@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 309595687566021926}
   - component: {fileID: 3166903845933798669}
   - component: {fileID: 945270520989030055}
-  - component: {fileID: 6458906136673424859}
   - component: {fileID: 8198385394518317047}
   m_Layer: 0
   m_Name: GoldenChicken
@@ -117,18 +116,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6458906136673424859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5186802550757877712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05dd654ad8376344f9be8e41811d7a18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8198385394518317047
 MonoBehaviour:
   m_ObjectHideFlags: 0
