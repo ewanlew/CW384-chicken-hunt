@@ -19,6 +19,7 @@ public class Chicken : MonoBehaviour
         if (distance <= killRadius) {
             if (isGolden) {
                 GameManager.Instance.TriggerTypingChallnge();
+                GameManager.Instance.AddScore(1);
                 Destroy(gameObject);
                 return;
             }
