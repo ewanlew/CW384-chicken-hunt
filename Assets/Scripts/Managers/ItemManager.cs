@@ -29,6 +29,8 @@ public class ItemManager : MonoBehaviour
 
     private void Update() {
         if (Time.timeScale == 0f) { return; }
+        
+        if (KeybindManager.Instance == null) { return; }
 
         if (Input.GetKeyDown(KeybindManager.Instance.GetKey(KeybindAction.MoveLeft))) {
             selectedIndex = Mathf.Max(selectedIndex - 1, 0);
