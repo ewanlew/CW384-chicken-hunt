@@ -30,20 +30,18 @@ public class ItemManager : MonoBehaviour
     private void Update() {
         if (Time.timeScale == 0f) { return; }
 
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeybindManager.Instance.GetKey(KeybindAction.MoveLeft))) {
             selectedIndex = Mathf.Max(selectedIndex - 1, 0);
             UpdateSelectorPosition();
-        } else if (Input.GetKeyDown(KeyCode.D)) {
+        } else if (Input.GetKeyDown(KeybindManager.Instance.GetKey(KeybindAction.MoveRight))) {
             selectedIndex = Mathf.Min(selectedIndex + 1, items.Count - 1);
             UpdateSelectorPosition();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
-                DiscardSelected();
-            } else {
-                UseSelected();
-            }
+        if (Input.GetKeyDown(KeybindManager.Instance.GetKey(KeybindAction.UseItem))) {
+            UseSelected();
+        } else if (Input.GetKeyDown(KeybindManager.Instance.GetKey(KeybindAction.DiscardItem))) {
+            DiscardSelected();
         }
     }
 
