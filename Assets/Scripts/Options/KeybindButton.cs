@@ -33,11 +33,24 @@ public class KeybindButton : MonoBehaviour
     }
 
     public void Refresh() {
-        if (label != null && KeybindManager.Instance != null) {
-            KeyCode key = KeybindManager.Instance.GetKey(action);
-            label.text = key.ToString();
+        if (label == null && KeybindManager.Instance == null) {
+            return;
         }
-    }
+
+        KeyCode key = KeybindManager.Instance.GetKey(action);
+        label.text = key.ToString();
+        bool hasConflict = false;
+
+        foreach (KeybindAction otherAction in System.Enum.GetValues(typeof(KeybindAction))) {
+            if (otherAction == action) continue;
+            if (KeybindManager.Instance.GetKey(otherAction) == key) {
+                hasConflict = true;
+                break;
+            }
+        }
+
+        label.color = hasConflict ? Color.red : Color.black;
+        }
 
     public static void RefreshAll() {
         foreach (var btn in allButtons) {
