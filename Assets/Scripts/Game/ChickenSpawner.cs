@@ -30,9 +30,9 @@ public class ChickenSpawner : MonoBehaviour
     private float nextSpawnTime;
 
     void Update() {
-        if (Time.time >= nextSpawnTime){
+        if (Time.unscaledTime >= nextSpawnTime){
             SpawnChicken();
-            nextSpawnTime = Time.time + spawnInterval;
+            nextSpawnTime = Time.unscaledTime + spawnInterval;
         }
     }
 
@@ -41,55 +41,68 @@ public class ChickenSpawner : MonoBehaviour
     }
 
     private IEnumerator SpawnChickenWithWarning() {
-        // range of spawn
-        float camHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        float spawnX = Camera.main.transform.position.x + Random.Range(
-            -camHalfWidth - scrollRange - xSpawnPadding, 
-            camHalfWidth + scrollRange + xSpawnPadding);
-        Vector3 spawnPos = new Vector3(spawnX, -6f, 0f);
+        if (!PauseState.IsGamePaused && !TypingState.IsUserTyping ){
+            // range of spawn
+            float camHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
+            float spawnX = Camera.main.transform.position.x + Random.Range(
+                -camHalfWidth - scrollRange - xSpawnPadding, 
+                camHalfWidth + scrollRange + xSpawnPadding);
+            Vector3 spawnPos = new Vector3(spawnX, -6f, 0f);
 
-        // ideal spawn point
-        Vector3 warningWorldPos = spawnPos + Vector3.up * 1.6f;
+            // ideal spawn point
+            Vector3 warningWorldPos = spawnPos + Vector3.up * 1.6f;
 
-        // clamp icon w/in cam view
-        Vector3 viewportPos = Camera.main.WorldToViewportPoint(warningWorldPos);
-        viewportPos.x = Mathf.Clamp01(viewportPos.x); // clamp horizontal screen space (0–1)
+            // clamp icon w/in cam view
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(warningWorldPos);
+            viewportPos.x = Mathf.Clamp01(viewportPos.x); // clamp horizontal screen space (0–1)
 
-        Vector3 clampedWorldPos = Camera.main.ViewportToWorldPoint(viewportPos);
-        clampedWorldPos.z = 0f; // ensure it's in view
+            Vector3 clampedWorldPos = Camera.main.ViewportToWorldPoint(viewportPos);
+            clampedWorldPos.z = 0f; // ensure it's in view
 
-        // spawn warning
-        GameObject warning = Instantiate(warningIconPrefab, clampedWorldPos, Quaternion.identity);
+            // spawn warning
+            GameObject warning = Instantiate(warningIconPrefab, clampedWorldPos, Quaternion.identity);
 
-        yield return new WaitForSeconds(0.5f); // warning display time
+            yield return new WaitForSecondsRealtime(0.5f); // warning display time
 
-        Destroy(warning); // fade is handled separately
+            Destroy(warning); // fade is handled separately
 
-        GameObject prefabToSpawn;
+            GameObject prefabToSpawn;
 
-        // if the item bar full force normal chicken
-        if (ItemManager.Instance != null && ItemManager.Instance.IsFull()) {
-            prefabToSpawn = chickenPrefab;
-        } else {
-            prefabToSpawn = Random.value <= goldenChickenChance ? goldenChickenPrefab : chickenPrefab;
+            // if the item bar full force normal chicken
+            if (ItemManager.Instance != null && ItemManager.Instance.IsFull()) {
+                prefabToSpawn = chickenPrefab;
+            } else {
+                prefabToSpawn = Random.value <= goldenChickenChance ? goldenChickenPrefab : chickenPrefab;
+            }
+
+            GameObject chicken = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+
+
+            // vector to centre w/ offset
+            float toCenter = Camera.main.transform.position.x - spawnX;
+            float xVelocity = (toCenter * baseXVelocity) + Random.Range(minXOffset, maxXOffset);
+            float yVelocity = Random.Range(minYOffset, maxYOffset);
+
+            // applies vector + rotation
+            Rigidbody2D rb = chicken.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+
+            float spin = Random.Range(minSpin, maxSpin);
+            rb.AddTorque(spin, ForceMode2D.Impulse);
+
+            // KILL chicken after a lil
+            StartCoroutine(DestroyChickenAfterTime(chicken, chickenLifespanSecs));
         }
-
-        GameObject chicken = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
-
-
-        // vector to centre w/ offset
-        float toCenter = Camera.main.transform.position.x - spawnX;
-        float xVelocity = (toCenter * baseXVelocity) + Random.Range(minXOffset, maxXOffset);
-        float yVelocity = Random.Range(minYOffset, maxYOffset);
-
-        // applies vector + rotation
-        Rigidbody2D rb = chicken.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
-
-        float spin = Random.Range(minSpin, maxSpin);
-        rb.AddTorque(spin, ForceMode2D.Impulse);
-
-        // KILL chicken after a lil
-        Destroy(chicken, chickenLifespanSecs);
     }
+
+    private IEnumerator DestroyChickenAfterTime(GameObject chicken, float time) {
+        float elapsed = 0f;
+        while (elapsed < time) {
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        Destroy(chicken);
+    }
+
+
 }

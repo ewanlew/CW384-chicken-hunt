@@ -22,6 +22,7 @@ public class TypingChallenge : MonoBehaviour
         inputText.text = "";
         currentIndex = 0;
         challengeActive = true;
+        TypingState.IsUserTyping = true;
     }
 
     void Update() {
@@ -45,6 +46,7 @@ public class TypingChallenge : MonoBehaviour
 
     void ChallengeSuccess() {
         challengeActive = false;
+        TypingState.IsUserTyping = false;
         ItemManager.Instance.AddItem(pendingReward);
 
         EndChallenge();
@@ -53,6 +55,7 @@ public class TypingChallenge : MonoBehaviour
     IEnumerator ChallengeFail() {
         inputText.text = "<b><color=red>WRONG!</color></b>";
         challengeActive = false;
+        TypingState.IsUserTyping = false;
         yield return new WaitForSecondsRealtime(1f);
         EndChallenge();
     }
@@ -81,6 +84,7 @@ public class TypingChallenge : MonoBehaviour
         StopAllCoroutines();
         GameManager.Instance.typingPanel.SetActive(false);
         challengeActive = false;
+        TypingState.IsUserTyping = false;
         currentIndex = 0;
 
         PlayerShooter shooter = Object.FindFirstObjectByType<PlayerShooter>();

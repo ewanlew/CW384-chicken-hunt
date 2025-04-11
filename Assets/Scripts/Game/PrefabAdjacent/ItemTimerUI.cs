@@ -20,8 +20,10 @@ public class ItemTimerUI : MonoBehaviour
 
     private IEnumerator UpdateTimer() {
         while (remaining > 0f){
-            remaining -= Time.deltaTime;
-            timerText.text = FormatTime(remaining);
+            if (!PauseState.IsGamePaused && !TypingState.IsUserTyping){
+                remaining -= Time.unscaledDeltaTime; 
+                timerText.text = FormatTime(remaining);
+            }
             yield return null;
         }
         Destroy(gameObject);
