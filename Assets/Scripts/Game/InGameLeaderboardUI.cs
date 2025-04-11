@@ -26,25 +26,28 @@ public class InGameLeaderboardUI : MonoBehaviour
 
 
     public void UpdateDisplay(int score) {
+    
         List<ScoreEntry> sorted = LeaderboardManager.Instance.GetTopScores();
-        Debug.Log($"Updating compact leaderboard for score: {score}");
+        int rank = LeaderboardManager.Instance.GetPlayerRank(score);
 
-        int rank = LeaderboardManager.Instance.GetPlayerRank(score) - 1;
-
-        if (rank == -1 || sorted.Count == 0) {
-            currentText.text = $"<b>{score}</b> points - Unranked";
+        if (rank <= 0) {
+            currentText.text = $"<b>#–</b>  {score} pts";
             aboveText.text = "";
             return;
         }
 
-        ScoreEntry current = sorted[rank]; 
-        currentText.text = $"<b><color=#00FF00>#{rank + 1}</color></b> {current.score} points";
+        // show current player
+        currentText.text = $"<b>#{rank}</b>  {score} pts";
 
-        if (rank > 0) {
-            ScoreEntry above = sorted[rank - 1];
-            aboveText.text = $"<color=#888><size=90%>#{rank} {above.score} points</size></color>";
+        // show player above (only if not rank 1)
+        if (rank > 1 && rank - 2 < sorted.Count) {
+            ScoreEntry aboveEntry = sorted[rank - 2];
+            aboveText.text = $"#{rank - 1}  {aboveEntry.score} pts";
         } else {
             aboveText.text = "";
-        }
+}
+
+
+
     }
 }

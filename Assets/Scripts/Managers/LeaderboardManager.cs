@@ -30,7 +30,13 @@ public class LeaderboardManager : MonoBehaviour
     }
 
     public int GetPlayerRank(int score) {
-        return leaderboard.OrderByDescending(e => e.score).ToList().FindIndex(e => e.score == score) + 1;
+        var sorted = leaderboard.OrderByDescending(e => e.score).ToList();
+        for (int i = 0; i < sorted.Count; i++) {
+            if (score >= sorted[i].score) {
+                return i + 1;
+            }
+        }
+        return sorted.Count + 1;
     }
 
     private void SaveLeaderboard() {
