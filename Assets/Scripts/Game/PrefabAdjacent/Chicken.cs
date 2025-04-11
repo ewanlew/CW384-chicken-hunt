@@ -30,6 +30,7 @@ public class Chicken : MonoBehaviour
                 return;
             }
             StartCoroutine(HitAnimation());
+            Screenshake.Instance?.Shake();
 
             if (ParticleManager.Instance.CurrentQuality == ParticleQuality.Off) { 
                 return;
