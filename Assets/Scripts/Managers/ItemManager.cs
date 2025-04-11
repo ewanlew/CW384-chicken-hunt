@@ -9,6 +9,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private Sprite emptySlotSprite;
     [SerializeField] private Sprite[] itemSprites;
     [SerializeField] private Image selectionHighlight;
+    [SerializeField] private GameObject itemEffectUIPrefab;
+    [SerializeField] private Transform itemEffectUIContainer;
 
     private List<ItemType> items = new List<ItemType>();
     private int selectedIndex = 0;
@@ -80,14 +82,25 @@ public class ItemManager : MonoBehaviour
         switch (item) {
             case ItemType.SlowTime:
                 GameManager.Instance.SlowTimeEffect();
+                ShowEffectUI("Slow Time", itemSprites[0], 15f);
                 break;
             case ItemType.ExtraLife:
                 GameManager.Instance.AddLife(1f);
+                ShowEffectUI("Extra Life", itemSprites[1], 0f);
                 break;
             case ItemType.DoublePoints:
                 GameManager.Instance.DoublePointsEffect();
+                ShowEffectUI("Doule Points", itemSprites[2], 10f);
                 break;
         }
+    }
+
+    private void ShowEffectUI(string name, Sprite icon, float duration) {
+        if (duration <= 0f) { return; }
+
+        GameObject ui = Instantiate(itemEffectUIPrefab, itemEffectUIContainer);
+        ItemTimerUI uiScript = ui.GetComponent<ItemTimerUI>();
+        uiScript.Init(icon, name, duration);
     }
 
     private void UpdateUI() {
