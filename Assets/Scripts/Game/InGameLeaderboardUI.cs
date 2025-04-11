@@ -45,9 +45,6 @@ public class InGameLeaderboardUI : MonoBehaviour
             aboveText.text = $"#{rank - 1}  {aboveEntry.score} pts";
         } else {
             aboveText.text = "";
-}
-
-
-
+        }
     }
 }

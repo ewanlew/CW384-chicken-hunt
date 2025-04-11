@@ -54,6 +54,12 @@ public class LeaderboardManager : MonoBehaviour
             leaderboard = new List<ScoreEntry>();
         }
     }
+
+    public void ResetLeaderboard() {
+        leaderboard.Clear();
+        PlayerPrefs.DeleteKey(SaveKey);
+        PlayerPrefs.Save();
+    }
 }
 
 [System.Serializable]

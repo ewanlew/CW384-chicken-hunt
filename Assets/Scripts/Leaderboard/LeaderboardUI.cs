@@ -10,9 +10,15 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField] private GameObject entryPrefab;
     [SerializeField] private Transform contentParent;
     [SerializeField] private Button backButton;
+    [SerializeField] private Button resetButton;
 
     void Start() {
         backButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));
+        resetButton.onClick.AddListener(() =>  {
+            LeaderboardManager.Instance.ResetLeaderboard();
+            PopulateLeaderboard();
+        });
+
         if (LeaderboardManager.Instance == null) {
             Debug.LogWarning("LeaderboardManager not ready. Retrying...");
             Invoke(nameof(PopulateLeaderboard), 0.2f); // try again shortly
@@ -20,7 +26,6 @@ public class LeaderboardUI : MonoBehaviour
             PopulateLeaderboard();
         }
     }
-
 
     void PopulateLeaderboard() {
         List<ScoreEntry> scores = LeaderboardManager.Instance.GetTopScores();
@@ -57,9 +62,5 @@ public class LeaderboardUI : MonoBehaviour
 
             pos++;
         }
-    }
-
-    public void backToMainMenu(){
-        
     }
 }
