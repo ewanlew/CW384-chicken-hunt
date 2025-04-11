@@ -90,7 +90,7 @@ public class ItemManager : MonoBehaviour
                 break;
             case ItemType.DoublePoints:
                 GameManager.Instance.DoublePointsEffect();
-                ShowEffectUI("Doule Points", itemSprites[2], 10f);
+                ShowEffectUI("Double Points", itemSprites[2], 10f);
                 break;
         }
     }
