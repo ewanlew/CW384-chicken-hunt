@@ -8,35 +8,43 @@ public class InGameLeaderboardUI : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI aboveText;
     [SerializeField] private TextMeshProUGUI currentText;
-    [SerializeField] private TextMeshProUGUI belowText;
 
-    public void UpdateDisplay(int playerScore) {
+    void Start() {
+        // start w 0 pts on lb
+        currentText.text = "<size=110%>0 points</size>";
+        
+        List<ScoreEntry> topScores = LeaderboardManager.Instance.GetTopScores();
+        if (topScores.Count > 0) {
+            ScoreEntry lowest = topScores[topScores.Count - 1];
+            aboveText.text =
+                $"<b><size=90%>#{topScores.Count}</size></b> " +
+                $"<size=100%>{lowest.score} points</size> ";
+        } else {
+            aboveText.text = "<i>No scores yet</i>";
+        }
+    }
+
+
+    public void UpdateDisplay(int score) {
         List<ScoreEntry> sorted = LeaderboardManager.Instance.GetTopScores();
-        int rank = LeaderboardManager.Instance.GetPlayerRank(playerScore) - 1;
+        Debug.Log($"Updating compact leaderboard for score: {score}");
 
-        if (rank == 1 || sorted.Count == 0) {
-            currentText.text = $"<b>{playerScore}</b> pts - Unranked";
+        int rank = LeaderboardManager.Instance.GetPlayerRank(score) - 1;
+
+        if (rank == -1 || sorted.Count == 0) {
+            currentText.text = $"<b>{score}</b> points - Unranked";
             aboveText.text = "";
-            belowText.text = "";
             return;
         }
 
         ScoreEntry current = sorted[rank]; 
-        currentText.text = $"<b><color=#00FF00>#{rank + 1}</color></b> {current.score} pts";
+        currentText.text = $"<b><color=#00FF00>#{rank + 1}</color></b> {current.score} points";
 
         if (rank > 0) {
             ScoreEntry above = sorted[rank - 1];
-            aboveText.text = $"<color=#888><size=90%>#{rank} {above.score} pts</size></color>";
+            aboveText.text = $"<color=#888><size=90%>#{rank} {above.score} points</size></color>";
         } else {
             aboveText.text = "";
         }
-
-        if (rank < sorted.Count - 1) {
-            ScoreEntry below = sorted[rank + 1];
-            belowText.text = $"<color=#888><size=90%>#{rank + 2} {below.score} pts</size></color>";
-        } else {
-            belowText.text = "";
-        }
-
     }
 }

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amt){
         if (isDoublePointsActive) { amt *= 2; }
         score += amt;
+        
         UpdateUI();
         leaderboardUI?.UpdateDisplay(score);
     }
