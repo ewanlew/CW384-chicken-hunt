@@ -8,12 +8,23 @@ public class Screenshake : MonoBehaviour
     private Vector3 originalPos;
     private Coroutine shakeRoutine;
 
+    private bool shakeEnabled = true;
+
     void Awake() {
         Instance = this;
         originalPos = transform.localPosition;
+
+        int val = PlayerPrefs.GetInt("ScreenShake", 1);
+        shakeEnabled = (val == 1);
+    }
+    
+    public void SetEnabled(bool enabled) {
+        shakeEnabled = enabled;
     }
 
     public void Shake(float duration = 0.1f, float magnitude = 0.1f) {
+        if (!shakeEnabled) { return; }
+
         if (shakeRoutine != null) {
             StopCoroutine(shakeRoutine);
         }

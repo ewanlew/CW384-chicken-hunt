@@ -1859,7 +1859,7 @@ GameObject:
   - component: {fileID: 266060297}
   - component: {fileID: 266060296}
   m_Layer: 5
-  m_Name: FullscreenToggle
+  m_Name: ScreenshakeToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1926,10 +1926,34 @@ MonoBehaviour:
     m_RotationOrder: 4
   onToggleOn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1608529431}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: SetScreenShake
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onToggleOff:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1608529431}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: SetScreenShake
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &266060297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8680,6 +8704,7 @@ GameObject:
   - component: {fileID: 1443588825}
   - component: {fileID: 1443588824}
   - component: {fileID: 1443588827}
+  - component: {fileID: 1443588828}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8805,6 +8830,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1443588828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443588823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2bca25ba2c2dec4096b50be81ddb96a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1445756944
 GameObject:
   m_ObjectHideFlags: 0
@@ -10380,6 +10417,7 @@ MonoBehaviour:
   fpsCapSlider: {fileID: 619908324}
   particleSlider: {fileID: 953091611}
   particleLabel: {fileID: 1570332732}
+  screenShakeToggle: {fileID: 266060296}
 --- !u!4 &1608529432
 Transform:
   m_ObjectHideFlags: 0

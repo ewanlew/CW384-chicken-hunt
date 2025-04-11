@@ -26,6 +26,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private Slider fpsCapSlider;
     [SerializeField] private Slider particleSlider;
     [SerializeField] private TextMeshProUGUI particleLabel;
+    [SerializeField] private ToggleSwitch screenShakeToggle;
 
 
     private void Start() {
@@ -74,6 +75,10 @@ public class OptionsManager : MonoBehaviour
         particleSlider.value = particleSetting;
         SetParticleAmount(particleSetting);
         particleSlider.onValueChanged.AddListener(OnParticleSliderChanged);
+
+        bool screenShake = PlayerPrefs.GetInt("ScreenShake", 1) == 1;
+        screenShakeToggle.SetStateAndStartAnimation(screenShake);
+        Screenshake.Instance.SetEnabled(screenShake);
     }
 
     public void OnMasterVolumeChanged(float value) {
@@ -141,6 +146,12 @@ public class OptionsManager : MonoBehaviour
     public void OnFPSCapChanged(float val) {
         int fps = Mathf.RoundToInt(fpsCapSlider.value);
         framerateLimiter.SetFPSCap(fps);
+    }
+
+    public void SetScreenShake(bool enabled) {
+        PlayerPrefs.SetInt("ScreenShake", enabled ? 1 : 0);
+        PlayerPrefs.Save();
+        Debug.Log($"[OptionsManager] Screenshake set to: {enabled}");
     }
 
     public void SetParticleAmount(int val) {
