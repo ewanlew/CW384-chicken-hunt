@@ -129,3 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killRadius: 0.5
+  isGolden: 0
+  isHidden: 0
+  hitParticlesPrefab: {fileID: 4150495617961409281, guid: f966680cfdfdfa646ad37f4fed86415d, type: 3}

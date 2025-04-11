@@ -6,6 +6,7 @@ public class Chicken : MonoBehaviour
     public float killRadius = 0.5f;
     public bool isGolden = false;
     public bool isHidden = false;
+    [SerializeField] private GameObject hitParticlesPrefab;
 
     void Update() {
         if (transform.position.y < -6f) {
@@ -29,6 +30,9 @@ public class Chicken : MonoBehaviour
                 return;
             }
             GameManager.Instance.AddScore(1);
+            if (!isGolden && hitParticlesPrefab != null) {
+                Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
+            }
             StartCoroutine(HitAnimation());
             Debug.Log("hit!");
         } else if (distance <= killRadius * 2f) {
