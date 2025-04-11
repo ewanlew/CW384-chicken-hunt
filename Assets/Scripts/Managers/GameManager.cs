@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float lives = 2f;
     [SerializeField] private bool isDoublePointsActive = false;
 
+    public InGameLeaderboardUI leaderboardUI;
+
     void Start() {
         UpdateUI();
         gameOverPanel.SetActive(false);
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         if (isDoublePointsActive) { amt *= 2; }
         score += amt;
         UpdateUI();
+        leaderboardUI?.UpdateDisplay(score);
     }
 
     public void Miss(bool nearMiss = false) {
