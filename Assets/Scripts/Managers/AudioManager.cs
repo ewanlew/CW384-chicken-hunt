@@ -22,7 +22,8 @@ public class AudioManager : MonoBehaviour
 
 
     public void SetVolume(string exposedParam, float value) {
-        audioMixer.SetFloat(exposedParam, Mathf.Log10(value) * 20);
+        float clamped = Mathf.Clamp(value, 0.0001f, 1f);
+        audioMixer.SetFloat(exposedParam, Mathf.Log10(clamped) * 20f);
     }
 
     public void SaveVolumes() {

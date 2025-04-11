@@ -29,12 +29,29 @@ public class Chicken : MonoBehaviour
                 isHidden = true;
                 return;
             }
-            GameManager.Instance.AddScore(1);
-            if (!isGolden && hitParticlesPrefab != null) {
-                Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
-            }
             StartCoroutine(HitAnimation());
-            Debug.Log("hit!");
+
+            if (ParticleManager.Instance.CurrentQuality == ParticleQuality.Off) { 
+                return;
+            }
+
+            GameManager.Instance.AddScore(1);
+            if (hitParticlesPrefab != null) {
+
+                GameObject fx = Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
+
+                if (ParticleManager.Instance.CurrentQuality == ParticleQuality.Less) {
+                ParticleSystem ps = fx.GetComponent<ParticleSystem>();
+                    if (ps != null) {
+                        var emission = ps.emission;
+                        if (emission.burstCount > 0) {
+                            ParticleSystem.Burst burst = emission.GetBurst(0);
+                            burst.count = 15f;
+                            emission.SetBurst(0, burst);
+                        }
+                    }
+                }
+            }
         } else if (distance <= killRadius * 2f) {
             GameManager.Instance.Miss(true);
             Debug.Log("close but missed...");

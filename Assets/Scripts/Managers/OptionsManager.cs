@@ -24,12 +24,16 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private ToggleSwitch capFPSToggle;
     [SerializeField] private FramerateLimiter framerateLimiter;
     [SerializeField] private Slider fpsCapSlider;
+    [SerializeField] private Slider particleSlider;
+    [SerializeField] private TextMeshProUGUI particleLabel;
+
 
     private void Start() {
         // AUDIO
-        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
-        float sfx = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
-        float music = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float master = Mathf.Clamp(PlayerPrefs.GetFloat("MasterVolume", 1f), 0f, 1f);
+        float sfx = Mathf.Clamp(PlayerPrefs.GetFloat("SFXVolume", 0.5f), 0f, 1f);
+        float music = Mathf.Clamp(PlayerPrefs.GetFloat("MusicVolume", 0.5f), 0f, 1f);
+
 
         masterVolumeSlider.value = master;
         sfxVolumeSlider.value = sfx;
@@ -63,6 +67,13 @@ public class OptionsManager : MonoBehaviour
         int savedCap = PlayerPrefs.GetInt("FPSCap", 60);
         fpsCapSlider.value = savedCap;
         framerateLimiter.SetFPSCap(savedCap);
+
+        // VFX
+
+        int particleSetting = PlayerPrefs.GetInt("ParticleAmount", (int)ParticleQuality.More);
+        particleSlider.value = particleSetting;
+        SetParticleAmount(particleSetting);
+        particleSlider.onValueChanged.AddListener(OnParticleSliderChanged);
     }
 
     public void OnMasterVolumeChanged(float value) {
@@ -131,6 +142,40 @@ public class OptionsManager : MonoBehaviour
         int fps = Mathf.RoundToInt(fpsCapSlider.value);
         framerateLimiter.SetFPSCap(fps);
     }
+
+    public void SetParticleAmount(int val) {
+        ParticleQuality quality = (ParticleQuality) val;
+        PlayerPrefs.SetInt("ParticleAmount", val);
+        PlayerPrefs.Save();
+
+        ParticleManager.Instance?.ApplyQualitySetting(quality);
+        UpdateParticleLabel(val);
+
+        Debug.Log($"[OptionsManager] Particle Amount set to: {quality}");
+    }
+
+    public void OnParticleSliderChanged(float value) {
+        int clamped = Mathf.RoundToInt(value);
+        particleSlider.value = clamped; // snap to step
+        SetParticleAmount(clamped);
+        UpdateParticleLabel(clamped);
+    }
+
+    private void UpdateParticleLabel(int value) {
+        switch ((ParticleQuality)value) {
+            case ParticleQuality.Off:
+                particleLabel.text = "Off";
+                break;
+            case ParticleQuality.Less:
+                particleLabel.text = "Less";
+                break;
+            case ParticleQuality.More:
+                particleLabel.text = "More";
+                break;
+        }
+    }
+
+
 
     public void Return() {
         SceneManager.LoadScene(0);
