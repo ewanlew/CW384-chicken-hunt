@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TypingChallenge : MonoBehaviour
 {
@@ -60,11 +61,36 @@ public class TypingChallenge : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.typingPanel.SetActive(false);
 
+        // cleanup any leftover golden chickens
+        Chicken[] chickens = Object.FindObjectsByType<Chicken>(FindObjectsSortMode.None);
+        foreach (var chick in chickens) {
+            if (chick != null && chick.isGolden && chick.isHidden) {
+                Destroy(chick.gameObject);
+            }
+        }
+
+
+
         PlayerShooter shooter = Object.FindFirstObjectByType<PlayerShooter>();
         if (shooter != null) {
             shooter.enabled = true;
         }
     }
+
+    public void ForceCancelChallenge() {
+        StopAllCoroutines();
+        GameManager.Instance.typingPanel.SetActive(false);
+        challengeActive = false;
+        currentIndex = 0;
+
+        PlayerShooter shooter = Object.FindFirstObjectByType<PlayerShooter>();
+        if (shooter != null) {
+            shooter.enabled = true;
+        }
+
+        Time.timeScale = 1f;
+    }
+
 
     public void SetRewardItem(ItemType reward) {
         pendingReward = reward;

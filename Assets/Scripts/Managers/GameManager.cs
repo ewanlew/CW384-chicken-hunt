@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     void Awake() {
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
@@ -122,6 +121,15 @@ public class GameManager : MonoBehaviour
 
     public void Replay() {
         Time.timeScale = 1f;
+
+        if (typingPanel != null) {
+            typingPanel.SetActive(false);
+        }
+
+        if (typingChallenge != null) {
+            typingChallenge.ForceCancelChallenge();
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -5,6 +5,7 @@ public class Chicken : MonoBehaviour
 {
     public float killRadius = 0.5f;
     public bool isGolden = false;
+    public bool isHidden = false;
 
     void Update() {
         if (transform.position.y < -6f) {
@@ -20,7 +21,11 @@ public class Chicken : MonoBehaviour
             if (isGolden) {
                 GameManager.Instance.TriggerTypingChallnge();
                 GameManager.Instance.AddScore(1);
-                Destroy(gameObject);
+                
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<Rigidbody2D>().simulated = false;
+
+                isHidden = true;
                 return;
             }
             GameManager.Instance.AddScore(1);
