@@ -15,19 +15,33 @@ public class LeaderboardUI : MonoBehaviour
     {
         PopulateLeaderboard();
         backButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));
+
+        if (LeaderboardManager.Instance == null) {
+        Debug.LogWarning("LeaderboardManager not found");
+        return;
+    }
+
     }
 
     void PopulateLeaderboard() {
         List<ScoreEntry> scores = LeaderboardManager.Instance.GetTopScores();
 
-        if (scores.Count > 0) {
-            var latest = scores[0];
-            int rank = LeaderboardManager.Instance.GetPlayerRank(latest.score);
+        string recentJson = PlayerPrefs.GetString("RecentScore", "");
+        ScoreEntry recent = null;
+
+        if (!string.IsNullOrEmpty(recentJson)) {
+            recent = JsonUtility.FromJson<ScoreEntry>(recentJson);
+        } else if (scores.Count > 0) {
+            recent = scores[0]; // fallback to top score if no recent
+        }
+
+        if (recent != null) {
+            int rank = LeaderboardManager.Instance.GetPlayerRank(recent.score);
 
             recentEntryText.text =
                 $"<b><size=150%>#{rank}</size></b> " +
-                $"<size=110%>{latest.score} pts</size> " +
-                $"<color=#AAAAAA><size=90%>{latest.date} {latest.time}</size></color>";
+                $"<size=110%>{recent.score} pts</size> " +
+                $"<color=#AAAAAA><size=90%>{recent.date} {recent.time}</size></color>";
         } else {
             recentEntryText.text = "No scores yet. <b>Play now!</b>";
         }

@@ -105,6 +105,13 @@ public class GameManager : MonoBehaviour
     void GameOver() {
         Time.timeScale = 0f;
         LeaderboardManager.Instance.AddScore(score);
+
+        ScoreEntry recent = new ScoreEntry(score);
+        string json = JsonUtility.ToJson(recent);
+        PlayerPrefs.SetString("RecentScore", json);
+        PlayerPrefs.Save();
+
+
         gameOverPanel.SetActive(true);
         finalScoreText.text = "Final Score: " + score;
     }
