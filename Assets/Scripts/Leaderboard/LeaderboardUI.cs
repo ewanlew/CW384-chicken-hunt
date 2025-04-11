@@ -11,17 +11,16 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private Button backButton;
 
-    void Start()
-    {
-        PopulateLeaderboard();
+    void Start() {
         backButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));
-
         if (LeaderboardManager.Instance == null) {
-        Debug.LogWarning("LeaderboardManager not found");
-        return;
+            Debug.LogWarning("LeaderboardManager not ready. Retrying...");
+            Invoke(nameof(PopulateLeaderboard), 0.2f); // try again shortly
+        } else {
+            PopulateLeaderboard();
+        }
     }
 
-    }
 
     void PopulateLeaderboard() {
         List<ScoreEntry> scores = LeaderboardManager.Instance.GetTopScores();
@@ -58,5 +57,9 @@ public class LeaderboardUI : MonoBehaviour
 
             pos++;
         }
+    }
+
+    public void backToMainMenu(){
+        
     }
 }
