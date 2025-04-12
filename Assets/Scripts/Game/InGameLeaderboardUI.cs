@@ -32,19 +32,19 @@ public class InGameLeaderboardUI : MonoBehaviour
         int rank = LeaderboardManager.Instance.GetPlayerRank(score);
 
         if (rank <= 0) {
-            currentText.text = $"<b>#–</b>  {score} pts";
+            currentText.text = $"<b>#–</b>  {score} points";
             aboveText.text = "";
             if (abovePanel != null) abovePanel.SetActive(false);
             return;
         }
 
         // show current player
-        currentText.text = $"<b>#{rank}</b>  {score} pts";
+        currentText.text = $"<b>#{rank}</b>  {score} points";
 
         // show player above (only if not rank 1)
         if (rank > 1 && rank - 2 < sorted.Count) {
             ScoreEntry aboveEntry = sorted[rank - 2];
-            aboveText.text = $"#{rank - 1}  {aboveEntry.score} pts";
+            aboveText.text = $"#{rank - 1}  {aboveEntry.score} points";
             if (abovePanel != null) abovePanel.SetActive(true);
         } else {
             aboveText.text = "";

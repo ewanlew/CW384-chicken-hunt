@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject typingPanel;
 
     [Header("Text Objects")] 
-    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI finalScoreText;
 
@@ -125,8 +124,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
-        livesText.text = "Lives: " + lives.ToString("0.0");
-        scoreText.text = "Score: " + score;
+        livesText.text = "x" + lives.ToString("0.0");
     }
 
     void GameOver() {
