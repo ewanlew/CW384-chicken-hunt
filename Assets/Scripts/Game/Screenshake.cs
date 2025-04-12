@@ -5,19 +5,15 @@ public class Screenshake : MonoBehaviour
 {
     public static Screenshake Instance;
 
-    private Vector3 originalPos;
     private Coroutine shakeRoutine;
-
     private bool shakeEnabled = true;
 
     void Awake() {
         Instance = this;
-        originalPos = transform.localPosition;
-
         int val = PlayerPrefs.GetInt("ScreenShake", 1);
         shakeEnabled = (val == 1);
     }
-    
+
     public void SetEnabled(bool enabled) {
         shakeEnabled = enabled;
     }
@@ -34,17 +30,18 @@ public class Screenshake : MonoBehaviour
 
     private IEnumerator ShakeCoroutine(float duration, float magnitude) {
         float elapsed = 0f;
+        Vector3 basePosition = transform.position; // current camera pos at shake start
 
         while (elapsed < duration) {
             float offsetX = Random.Range(-1f, 1f) * magnitude;
             float offsetY = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition = originalPos + new Vector3(offsetX, offsetY, 0f);
+            transform.position = basePosition + new Vector3(offsetX, offsetY, 0f);
 
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        transform.localPosition = originalPos;
+        transform.position = basePosition; // return to starting pos
     }
 }
