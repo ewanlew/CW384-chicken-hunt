@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class InGameLeaderboardUI : MonoBehaviour
 {
     
+    [SerializeField] private GameObject abovePanel;
     [SerializeField] private TextMeshProUGUI aboveText;
     [SerializeField] private TextMeshProUGUI currentText;
 
@@ -33,6 +34,7 @@ public class InGameLeaderboardUI : MonoBehaviour
         if (rank <= 0) {
             currentText.text = $"<b>#–</b>  {score} pts";
             aboveText.text = "";
+            if (abovePanel != null) abovePanel.SetActive(false);
             return;
         }
 
@@ -43,8 +45,10 @@ public class InGameLeaderboardUI : MonoBehaviour
         if (rank > 1 && rank - 2 < sorted.Count) {
             ScoreEntry aboveEntry = sorted[rank - 2];
             aboveText.text = $"#{rank - 1}  {aboveEntry.score} pts";
+            if (abovePanel != null) abovePanel.SetActive(true);
         } else {
             aboveText.text = "";
+            if (abovePanel != null) abovePanel.SetActive(false);
         }
     }
 }
