@@ -61,7 +61,7 @@ public class TypingChallenge : MonoBehaviour
     }
 
     void EndChallenge() {
-        Time.timeScale = 1f;
+        TimeManager.ResumeTime();
         GameManager.Instance.typingPanel.SetActive(false);
 
         // cleanup any leftover golden chickens
@@ -71,8 +71,6 @@ public class TypingChallenge : MonoBehaviour
                 Destroy(chick.gameObject);
             }
         }
-
-
 
         PlayerShooter shooter = Object.FindFirstObjectByType<PlayerShooter>();
         if (shooter != null) {
@@ -92,7 +90,7 @@ public class TypingChallenge : MonoBehaviour
             shooter.enabled = true;
         }
 
-        Time.timeScale = 1f;
+        TimeManager.ResumeTime();
     }
 
 

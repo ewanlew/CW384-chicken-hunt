@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void TriggerTypingChallnge() {
-        Time.timeScale = 0f;
+        TimeManager.FreezeTime();
 
         PlayerShooter shooter = Object.FindFirstObjectByType<PlayerShooter>();
         if (shooter != null) {
@@ -79,10 +79,23 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator SlowTimeCoroutine() {
-        Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(15f);
-        Time.timeScale = 1f;
+        TimeManager.SetSlowTime(0.5f);
+
+        float duration = 15f;
+        float elapsed = 0f;
+
+        while (elapsed < duration) {
+            if (!PauseState.IsGamePaused && !TypingState.IsUserTyping) {
+                elapsed += Time.unscaledDeltaTime;
+            }
+            yield return null;
+        }
+
+        if (!TimeManager.IsTimeFrozen) {
+            TimeManager.SetNormalSpeed();
+        }
     }
+
 
     public void AddLife(float amt) {
         lives += amt;
@@ -95,9 +108,20 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator DoublePointsCoroutine() {
         isDoublePointsActive = true;
-        yield return new WaitForSecondsRealtime(10f);
+
+        float duration = 10f;
+        float elapsed = 0f;
+
+        while (elapsed < duration) {
+            if (!PauseState.IsGamePaused && !TypingState.IsUserTyping) {
+                elapsed += Time.unscaledDeltaTime;
+            }
+            yield return null;
+        }
+
         isDoublePointsActive = false;
     }
+
 
     void UpdateUI()
     {
@@ -106,7 +130,7 @@ public class GameManager : MonoBehaviour
     }
 
     void GameOver() {
-        Time.timeScale = 0f;
+        TimeManager.SetSlowTime(0.5f);
         LeaderboardManager.Instance.AddScore(score);
 
         ScoreEntry recent = new ScoreEntry(score);
@@ -120,7 +144,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Replay() {
-        Time.timeScale = 1f;
+        TimeManager.SetNormalSpeed();
 
         if (typingPanel != null) {
             typingPanel.SetActive(false);
@@ -134,7 +158,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ReturnToMenu() {
-        Time.timeScale = 1f;
+        TimeManager.SetNormalSpeed();
         SceneManager.LoadScene(0);
     }
 }
