@@ -31,9 +31,9 @@ public class OptionsManager : MonoBehaviour
 
     private void Start() {
         // AUDIO
-        float master = Mathf.Clamp(PlayerPrefs.GetFloat("MasterVolume", 1f), 0f, 1f);
-        float sfx = Mathf.Clamp(PlayerPrefs.GetFloat("SFXVolume", 0.5f), 0f, 1f);
-        float music = Mathf.Clamp(PlayerPrefs.GetFloat("MusicVolume", 0.5f), 0f, 1f);
+        float master = AudioManager.Instance.GetSavedVolume("MasterVolume", 1f);
+        float sfx = AudioManager.Instance.GetSavedVolume("SFXVolume", 0.5f);
+        float music = AudioManager.Instance.GetSavedVolume("MusicVolume", 0.5f);
 
 
         masterVolumeSlider.value = master;
@@ -83,17 +83,14 @@ public class OptionsManager : MonoBehaviour
 
     public void OnMasterVolumeChanged(float value) {
         AudioManager.Instance.SetVolume("MasterVolume", value);
-        AudioManager.Instance.SaveVolumes();
     }
 
     public void OnSFXVolumeChanged(float value) {
         AudioManager.Instance.SetVolume("SFXVolume", value);
-        AudioManager.Instance.SaveVolumes();
     }
 
     public void OnMusicVolumeChanged(float value) {
         AudioManager.Instance.SetVolume("MusicVolume", value);
-        AudioManager.Instance.SaveVolumes();
     }
 
     private void UpdateVolume(Slider slider, TextMeshProUGUI label, float value) {

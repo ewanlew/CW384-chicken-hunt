@@ -572,7 +572,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 942828698}
   m_HandleRect: {fileID: 942828697}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.4623911
   m_Size: 0.63414246
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Disable Screenshake
+  m_text: Enable Screenshake
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b2b7adec1e4ad44b95b23cffddc245a, type: 2}
   m_sharedMaterial: {fileID: 9051067446180779045, guid: 7b2b7adec1e4ad44b95b23cffddc245a, type: 2}
@@ -6515,7 +6515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000044823, y: 0}
+  m_AnchoredPosition: {x: 0.000044823, y: 293}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1015572909
@@ -12866,7 +12866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1985074139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12880,6 +12880,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: be6c4f5999f886a459b69b7bc478c21a, type: 2}
+  musicSource: {fileID: 0}
+  backgroundMusic: {fileID: 0}
 --- !u!4 &1985074140
 Transform:
   m_ObjectHideFlags: 0
