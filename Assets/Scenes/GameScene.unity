@@ -4671,6 +4671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c968c35bebb6ab2429a131345e3eb2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abovePanel: {fileID: 1945340115}
   aboveText: {fileID: 1159255481}
   currentText: {fileID: 457350321}
 --- !u!1 &1945340115
