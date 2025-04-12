@@ -8,9 +8,15 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Source")]
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
 
-    [Header("Music Clip")]
+    [Header("Audio Clips")]
     [SerializeField] private AudioClip backgroundMusic;
+    public AudioClip menuClickClip;
+
+    [Header("Gameplay")]
+    public AudioClip chickenShineClip;
+    public AudioClip chickenSpawnClip;
 
     private void Awake() {
         if (Instance == null) {
@@ -80,5 +86,10 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = clip;
         musicSource.loop = true;
         musicSource.Play();
+    }
+
+    public void PlaySFX(AudioClip clip) {
+        if (clip == null || sfxSource == null) return;
+        sfxSource.PlayOneShot(clip);
     }
 }

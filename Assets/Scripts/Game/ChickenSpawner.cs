@@ -72,9 +72,15 @@ public class ChickenSpawner : MonoBehaviour
             if (ItemManager.Instance != null && ItemManager.Instance.IsFull()) {
                 prefabToSpawn = chickenPrefab;
             } else {
-                prefabToSpawn = Random.value <= goldenChickenChance ? goldenChickenPrefab : chickenPrefab;
+                bool isGolden = Random.value <= goldenChickenChance;
+                prefabToSpawn = isGolden ? goldenChickenPrefab : chickenPrefab;
+
+                if (isGolden) {
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.chickenShineClip);
+                }
             }
 
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.chickenSpawnClip);
             GameObject chicken = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
 
 
