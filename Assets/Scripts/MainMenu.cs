@@ -2,9 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
-{
+public class MainMenu : MonoBehaviour {
+    
+    [SerializeField] private GameObject CreditsUI;
     void Start() {
+        if (CreditsUI != null) {
+            CreditsUI.SetActive(false);
+        }
     }
 
     public void PlayGame() {
@@ -17,6 +21,18 @@ public class MainMenu : MonoBehaviour
     
     public void OpenLeaderboards() {
         SceneManager.LoadScene(3);
+    }
+
+    public void ShowCredits() {
+        if (CreditsUI != null) {
+            CreditsUI.SetActive(true);
+        }
+    }
+
+    public void HideCredits() {
+        if (CreditsUI != null) {
+            CreditsUI.SetActive(false);
+        }
     }
 
     public void QuitGame() {

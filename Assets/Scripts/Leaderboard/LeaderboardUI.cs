@@ -41,11 +41,10 @@ public class LeaderboardUI : MonoBehaviour
 
         if (recent != null) {
             int rank = LeaderboardManager.Instance.GetPlayerRank(recent.score);
-
             recentEntryText.text =
                 $"<b><size=150%>#{rank}</size></b> " +
                 $"<size=110%>{recent.score} pts</size> " +
-                $"<color=#AAAAAA><size=90%>{recent.date} {recent.time}</size></color>";
+                $"<color=#555555><size=90%>{recent.date} {recent.time}</size></color>";
         } else {
             recentEntryText.text = "No scores yet. <b>Play now!</b>";
         }
@@ -55,10 +54,16 @@ public class LeaderboardUI : MonoBehaviour
             GameObject go = Instantiate(entryPrefab, contentParent);
             TextMeshProUGUI text = go.GetComponent<TextMeshProUGUI>();
 
+            // Determine color based on position
+            string color = "#000000"; // default black
+            if (pos == 1) color = "#edb200"; // gold
+            else if (pos == 2) color = "#9c9c9c"; // silver
+            else if (pos == 3) color = "#9c5e21"; // bronze
+
             text.text =
-                $"<b><size=150%>#{pos}</size></b> " +
-                $"<size=110%>{entry.score} pts</size> " +
-                $"<color=#AAAAAA><size=90%>{entry.date} {entry.time}</size></color>";
+                $"<color={color}><b><size=150%>#{pos}</size></b> " +
+                $"<size=110%>{entry.score} pts</size></color> " +
+                $"<color=#555555><size=90%>{entry.date} {entry.time}</size></color>";
 
             pos++;
         }
