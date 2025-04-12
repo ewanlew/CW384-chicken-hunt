@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fa18329134fc2904583baa8c0d497a0a
+guid: 5c3707d35c5ce3c4d9bb4fafa61f9a3e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8583745177586586112
-    second: gold_chicken_0
+      213: -8347120380381915188
+    second: inv_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gold_chicken_0
+      name: inv_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 309
-        height: 486
+        width: 473
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0025588a2c69f1770800000000000000
-      internalID: 8583745177586586112
+      spriteID: cc799ed2d32192c80800000000000000
+      internalID: -8347120380381915188
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      inv_0: -8347120380381915188
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
