@@ -5,20 +5,21 @@ using System.Collections.Generic;
 
 public class LeaderboardUI : MonoBehaviour
 {
-
-    [SerializeField] private TextMeshProUGUI recentEntryText;
-    [SerializeField] private GameObject entryPrefab;
-    [SerializeField] private Transform contentParent;
-    [SerializeField] private Button backButton;
-    [SerializeField] private Button resetButton;
+    [SerializeField] private TextMeshProUGUI recentEntryText; // recent player score display
+    [SerializeField] private GameObject entryPrefab; // template for each score row
+    [SerializeField] private Transform contentParent; // where rows get added
+    [SerializeField] private Button backButton; // return to menu
+    [SerializeField] private Button resetButton; // wipe scores
 
     void Start() {
+        // hook up buttons
         backButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));
         resetButton.onClick.AddListener(() =>  {
             LeaderboardManager.Instance.ResetLeaderboard();
-            PopulateLeaderboard();
+            PopulateLeaderboard(); // refresh display
         });
 
+        // wait a tick if manager isn’t ready
         if (LeaderboardManager.Instance == null) {
             Debug.LogWarning("LeaderboardManager not ready. Retrying...");
             Invoke(nameof(PopulateLeaderboard), 0.2f); // try again shortly
@@ -28,15 +29,16 @@ public class LeaderboardUI : MonoBehaviour
     }
 
     void PopulateLeaderboard() {
-        List<ScoreEntry> scores = LeaderboardManager.Instance.GetTopScores();
+        List<ScoreEntry> scores = LeaderboardManager.Instance.GetTopScores(); // all scores
 
+        // load most recent score entry from PlayerPrefs
         string recentJson = PlayerPrefs.GetString("RecentScore", "");
         ScoreEntry recent = null;
 
         if (!string.IsNullOrEmpty(recentJson)) {
             recent = JsonUtility.FromJson<ScoreEntry>(recentJson);
         } else if (scores.Count > 0) {
-            recent = scores[0]; // fallback to top score if no recent
+            recent = scores[0]; // fallback to best score if none saved
         }
 
         if (recent != null) {
@@ -51,10 +53,10 @@ public class LeaderboardUI : MonoBehaviour
 
         int pos = 1;
         foreach (ScoreEntry entry in scores) {
-            GameObject go = Instantiate(entryPrefab, contentParent);
+            GameObject go = Instantiate(entryPrefab, contentParent); // create entry
             TextMeshProUGUI text = go.GetComponent<TextMeshProUGUI>();
 
-            // Determine color based on position
+            // pick colour based on position
             string color = "#000000"; // default black
             if (pos == 1) color = "#edb200"; // gold
             else if (pos == 2) color = "#9c9c9c"; // silver
