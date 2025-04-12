@@ -84,10 +84,20 @@ public class AudioManager : MonoBehaviour
     }
 
     public void LoadVolumes() {
-        SetVolume("MasterVolume", GetSavedVolume("MasterVolume", 1f));
-        SetVolume("SFXVolume", GetSavedVolume("SFXVolume", 0.5f));
-        SetVolume("MusicVolume", GetSavedVolume("MusicVolume", 0.5f));
+        float master = PlayerPrefs.GetFloat("MasterVolume_Saved", 1f);
+        float sfx = PlayerPrefs.GetFloat("SFXVolume_Saved", 0.5f);
+        float music = PlayerPrefs.GetFloat("MusicVolume_Saved", 0.5f);
+
+        SetVolume("MasterVolume", master);
+        SetVolume("SFXVolume", sfx);
+        SetVolume("MusicVolume", music);
+
+        Debug.Log($"[AudioManager] Loaded volumes from PlayerPrefs:\n" +
+                $"- Master: {master}\n" +
+                $"- SFX: {sfx}\n" +
+                $"- Music: {music}");
     }
+
 
     public void PlayMusic(AudioClip clip) {
         if (clip == null || musicSource == null) return;

@@ -148,6 +148,9 @@ public class OptionsManager : MonoBehaviour
     public void SetScreenShake(bool enabled) {
         PlayerPrefs.SetInt("ScreenShake", enabled ? 1 : 0);
         PlayerPrefs.Save();
+        if (enabled) {
+            Screenshake.Instance?.Shake();
+        }
         Debug.Log($"[OptionsManager] Screenshake set to: {enabled}");
     }
 
