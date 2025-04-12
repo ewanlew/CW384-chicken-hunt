@@ -5,33 +5,33 @@ using System.Collections;
 
 public class ItemTimerUI : MonoBehaviour
 {
-    [SerializeField] private Image iconImage;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private Image iconImage; // icon for the item
+    [SerializeField] private TextMeshProUGUI nameText; // label for item name
+    [SerializeField] private TextMeshProUGUI timerText; // time remaining display
 
-    private float duration;
-    private float remaining;
+    private float duration; // total time
+    private float remaining; // time left
+
     public void Init(Sprite icon, string itemName, float sec) {
-        iconImage.sprite = icon;
-        nameText.text = itemName;
-        duration = remaining = sec;
-        StartCoroutine(UpdateTimer());
+        iconImage.sprite = icon; // set icon image
+        nameText.text = itemName; // set label
+        duration = remaining = sec; // start from full duration
+        StartCoroutine(UpdateTimer()); // begin countdown
     }
 
     private IEnumerator UpdateTimer() {
         while (remaining > 0f){
             if (!PauseState.IsGamePaused && !TypingState.IsUserTyping){
-                remaining -= Time.unscaledDeltaTime; 
-                timerText.text = FormatTime(remaining);
+                remaining -= Time.unscaledDeltaTime; // tick timer in realtime
+                timerText.text = FormatTime(remaining); // update display
             }
-            yield return null;
+            yield return null; // wait a frame
         }
-        Destroy(gameObject);
+        Destroy(gameObject); // auto-remove when done
     }
 
     private string FormatTime(float time) {
-        int t = Mathf.CeilToInt(time);
-        return $"0:{t:00}";
+        int t = Mathf.CeilToInt(time); // round up
+        return $"0:{t:00}"; // format as mm:ss (ish)
     }
-
 }

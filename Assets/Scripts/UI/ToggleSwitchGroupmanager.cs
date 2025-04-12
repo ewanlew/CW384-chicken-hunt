@@ -4,19 +4,20 @@ using System.Collections.Generic;
 public class ToggleSwitchGroupManager : MonoBehaviour
 {
     [Header("Start Value")]
-    [SerializeField] private ToggleSwitch initialToggleSwitch;
+    [SerializeField] private ToggleSwitch initialToggleSwitch; // optional toggle to default on
 
     [Header("Toggle Options")]
-    [SerializeField] private bool allCanBeToggledOff;
-    
-    private List<ToggleSwitch> _toggleSwitches = new List<ToggleSwitch>();
+    [SerializeField] private bool allCanBeToggledOff; // if true, allows all toggles to be off
+
+    private List<ToggleSwitch> _toggleSwitches = new List<ToggleSwitch>(); // list of toggles in this group
 
     private void Awake()
     {
+        // find all toggle switches under this object
         ToggleSwitch[] toggleSwitches = GetComponentsInChildren<ToggleSwitch>();
         foreach (var toggleSwitch in toggleSwitches)
         {
-            RegisterToggleButtonToGroup(toggleSwitch);
+            RegisterToggleButtonToGroup(toggleSwitch); // hook them up
         }
     }
 
@@ -24,27 +25,30 @@ public class ToggleSwitchGroupManager : MonoBehaviour
     {
         if (_toggleSwitches.Contains(toggleSwitch))
             return;
-        
-        _toggleSwitches.Add(toggleSwitch);
-        
-        toggleSwitch.SetupForManager(this);
+
+        _toggleSwitches.Add(toggleSwitch); // store reference
+        toggleSwitch.SetupForManager(this); // link back to this manager
     }
 
     private void Start()
     {
         bool areAllToggledOff = true;
+
+        // check if any toggle is currently on
         foreach (var button in _toggleSwitches)
         {
             if (!button.CurrentValue) 
                 continue;
-            
+
             areAllToggledOff = false;
             break;
         }
 
+        // if something is on or toggle-off is allowed, don’t touch anything
         if (!areAllToggledOff || allCanBeToggledOff) 
             return;
-        
+
+        // otherwise, force one toggle on
         if (initialToggleSwitch != null)
             initialToggleSwitch.ToggleByGroupManager(true);
         else
@@ -56,6 +60,7 @@ public class ToggleSwitchGroupManager : MonoBehaviour
         if (_toggleSwitches.Count <= 1)
             return;
 
+        // allow all off if enabled and clicked toggle is already on
         if (allCanBeToggledOff && toggleSwitch.CurrentValue)
         {
             foreach (var button in _toggleSwitches)
@@ -63,11 +68,12 @@ public class ToggleSwitchGroupManager : MonoBehaviour
                 if (button == null)
                     continue;
 
-                button.ToggleByGroupManager(false);
+                button.ToggleByGroupManager(false); // turn them all off
             }
         }
         else
         {
+            // turn this one on, others off
             foreach (var button in _toggleSwitches)
             {
                 if (button == null)
@@ -81,4 +87,3 @@ public class ToggleSwitchGroupManager : MonoBehaviour
         }
     }
 }
-
