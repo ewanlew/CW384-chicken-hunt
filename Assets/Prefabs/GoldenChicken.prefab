@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8583745177586586112, guid: fa18329134fc2904583baa8c0d497a0a, type: 3}
+  m_Sprite: {fileID: 3590341410079910774, guid: 40ebf5ca85e65d741bd0b65eea8b6c9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,3 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killRadius: 0.5
   isGolden: 1
+  isHidden: 0
+  hitParticlesPrefab: {fileID: 4150495617961409281, guid: ed22aabcb45d0824ab0a0b17ba52f27a, type: 3}

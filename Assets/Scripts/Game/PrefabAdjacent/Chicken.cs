@@ -16,51 +16,43 @@ public class Chicken : MonoBehaviour
     }
 
     public void TryHit(Vector2 clickPosition) { 
-        float distance = Vector2.Distance(transform.position, clickPosition);
+    float distance = Vector2.Distance(transform.position, clickPosition);
 
-        if (distance <= killRadius) {
-            if (isGolden) {
-                GameManager.Instance.TriggerTypingChallnge();
-                GameManager.Instance.AddScore(1);
-                
-                GetComponent<SpriteRenderer>().enabled = false;
-                GetComponent<Rigidbody2D>().simulated = false;
+    if (distance <= killRadius) {
+        GameManager.Instance.AddScore(1);
+        StartCoroutine(HitAnimation());
+        Screenshake.Instance?.Shake();
 
-                isHidden = true;
-                return;
-            }
-            StartCoroutine(HitAnimation());
-            Screenshake.Instance?.Shake();
+        if (hitParticlesPrefab != null && ParticleManager.Instance.CurrentQuality != ParticleQuality.Off) {
+            GameObject fx = Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
 
-            if (ParticleManager.Instance.CurrentQuality == ParticleQuality.Off) { 
-                return;
-            }
-
-            GameManager.Instance.AddScore(1);
-            if (hitParticlesPrefab != null) {
-
-                GameObject fx = Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
-
-                if (ParticleManager.Instance.CurrentQuality == ParticleQuality.Less) {
-                ParticleSystem ps = fx.GetComponent<ParticleSystem>();
-                    if (ps != null) {
-                        var emission = ps.emission;
-                        if (emission.burstCount > 0) {
-                            ParticleSystem.Burst burst = emission.GetBurst(0);
-                            burst.count = 15f;
-                            emission.SetBurst(0, burst);
-                        }
+            if (ParticleManager.Instance.CurrentQuality == ParticleQuality.Less) {
+                var ps = fx.GetComponent<ParticleSystem>();
+                if (ps != null) {
+                    var emission = ps.emission;
+                    if (emission.burstCount > 0) {
+                        ParticleSystem.Burst burst = emission.GetBurst(0);
+                        burst.count = 10f;
+                        emission.SetBurst(0, burst);
                     }
                 }
             }
-        } else if (distance <= killRadius * 2f) {
-            GameManager.Instance.Miss(true);
-            Debug.Log("close but missed...");
-        } else {
-            GameManager.Instance.Miss(false);
-            Debug.Log("missed completely...");
         }
+        if (isGolden) {
+            GameManager.Instance.TriggerTypingChallnge();
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Rigidbody2D>().simulated = false;
+            isHidden = true;
+        }
+    } else if (distance <= killRadius * 2f) {
+        GameManager.Instance.Miss(true);
+        Debug.Log("close but missed...");
+    } else {
+        GameManager.Instance.Miss(false);
+        Debug.Log("missed completely...");
     }
+}
+
 
     IEnumerator HitAnimation() {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -92,6 +84,4 @@ public class Chicken : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-
 }
