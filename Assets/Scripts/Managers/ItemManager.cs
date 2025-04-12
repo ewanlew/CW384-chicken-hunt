@@ -75,10 +75,12 @@ public class ItemManager : MonoBehaviour
 
         items.RemoveAt(selectedIndex);
         selectedIndex = Mathf.Clamp(selectedIndex, 0, items.Count - 1);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.discardItem);
         UpdateUI();
     }
 
     private void ApplyItemEffect(ItemType item) {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.useItem);
         switch (item) {
             case ItemType.SlowTime:
                 GameManager.Instance.SlowTimeEffect();
@@ -87,6 +89,7 @@ public class ItemManager : MonoBehaviour
             case ItemType.ExtraLife:
                 GameManager.Instance.AddLife(1f);
                 ShowEffectUI("Extra Life", itemSprites[1], 0f);
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.addHealth);
                 break;
             case ItemType.DoublePoints:
                 GameManager.Instance.DoublePointsEffect();

@@ -128,7 +128,8 @@ public class GameManager : MonoBehaviour
     }
 
     void GameOver() {
-        TimeManager.SetSlowTime(0.5f);
+        TimeManager.FreezeTime();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.loseGame);
         LeaderboardManager.Instance.AddScore(score);
 
         ScoreEntry recent = new ScoreEntry(score);

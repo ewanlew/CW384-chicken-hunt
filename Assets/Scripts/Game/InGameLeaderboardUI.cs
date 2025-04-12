@@ -10,6 +10,8 @@ public class InGameLeaderboardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI aboveText;
     [SerializeField] private TextMeshProUGUI currentText;
 
+    private int previousRank = -1;
+
     void Start() {
         // start w 0 pts on lb
         currentText.text = "<size=110%>0 points</size>";
@@ -34,9 +36,18 @@ public class InGameLeaderboardUI : MonoBehaviour
         if (rank <= 0) {
             currentText.text = $"<b>#–</b>  {score} points";
             aboveText.text = "";
-            if (abovePanel != null) abovePanel.SetActive(false);
-            return;
+            if (abovePanel != null) { 
+                abovePanel.SetActive(false);
+                previousRank = -1;
+                return;
+            }
         }
+
+        if (previousRank > 0 && rank < previousRank) {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.increaseLeaderboard);
+        }
+
+        previousRank = rank;
 
         // show current player
         currentText.text = $"<b>#{rank}</b>  {score} points";

@@ -53,6 +53,7 @@ public class TypingChallenge : MonoBehaviour
     }
 
     IEnumerator ChallengeFail() {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.typingChallengeFail);
         inputText.text = "<b><color=red>WRONG!</color></b>";
         challengeActive = false;
         TypingState.IsUserTyping = false;

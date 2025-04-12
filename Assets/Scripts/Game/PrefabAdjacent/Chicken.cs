@@ -11,6 +11,7 @@ public class Chicken : MonoBehaviour
     void Update() {
         if (transform.position.y < -6f) {
             GameManager.Instance.Miss(false);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.chickenFall);
             Destroy(gameObject);
         }
     }
@@ -22,6 +23,9 @@ public class Chicken : MonoBehaviour
         GameManager.Instance.AddScore(1);
         StartCoroutine(HitAnimation());
         Screenshake.Instance?.Shake();
+
+        int audioIndex = Random.Range(0, AudioManager.Instance.chickenHit.Length);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.chickenHit[audioIndex]);
 
         if (hitParticlesPrefab != null && ParticleManager.Instance.CurrentQuality != ParticleQuality.Off) {
             GameObject fx = Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
@@ -39,6 +43,7 @@ public class Chicken : MonoBehaviour
             }
         }
         if (isGolden) {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.typingChallengeStart);
             GameManager.Instance.TriggerTypingChallnge();
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<Rigidbody2D>().simulated = false;

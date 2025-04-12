@@ -17,6 +17,15 @@ public class AudioManager : MonoBehaviour
     [Header("Gameplay")]
     public AudioClip chickenShineClip;
     public AudioClip chickenSpawnClip;
+    public AudioClip discardItem;
+    public AudioClip addHealth;
+    public AudioClip increaseLeaderboard;
+    public AudioClip loseGame;
+    public AudioClip useItem;
+    public AudioClip[] chickenHit;
+    public AudioClip chickenFall;
+    public AudioClip typingChallengeStart;
+    public AudioClip typingChallengeFail;
 
     private void Awake() {
         if (Instance == null) {

@@ -2560,6 +2560,11 @@ MonoBehaviour:
   menuClickClip: {fileID: 8300000, guid: aa0d20b740dc03f47b0179ff3416ce3d, type: 3}
   chickenShineClip: {fileID: 8300000, guid: 996b6ba1b987fce46872cca08386668f, type: 3}
   chickenSpawnClip: {fileID: 8300000, guid: 278660a9e9c9ddd42879f84dcb5c079a, type: 3}
+  discardItem: {fileID: 8300000, guid: 5b6599ce111447048aae09124e25c34e, type: 3}
+  addHealth: {fileID: 8300000, guid: d5f33391446654e4bb47183545185812, type: 3}
+  increaseLeaderboard: {fileID: 8300000, guid: 9a9a0779b37366f48960aa486f312a81, type: 3}
+  loseGame: {fileID: 8300000, guid: efd35c018c12c7743a893e850fad4cb8, type: 3}
+  useItem: {fileID: 8300000, guid: 3a4fd7894391434489e502a4981129a6, type: 3}
 --- !u!4 &1132838377
 Transform:
   m_ObjectHideFlags: 0
