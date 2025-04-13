@@ -173,14 +173,20 @@ public class GameManager : MonoBehaviour
 
         // set the text and colour
         lifeUpdateText.text = amount > 0 ? $"+{amount}" : $"{amount}";
-        lifeUpdateText.color = amount > 0 ? Color.green : Color.red;
+
+        string hexColour = amount > 0 ? "#00a113" : "#a10000";
+
+        if (ColorUtility.TryParseHtmlString(hexColour, out Color c)) {
+            lifeUpdateText.color = c;
+        }
+        
 
         // start fade-out
         lifeTextRoutine = StartCoroutine(FadeLifeText());
     }
 
     private IEnumerator FadeLifeText() {
-        float duration = 1f;
+        float duration = 2f;
         float elapsed = 0f;
 
         Color startColour = lifeUpdateText.color;
