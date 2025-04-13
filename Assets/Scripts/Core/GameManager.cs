@@ -123,7 +123,11 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
-        livesText.text = "x" + lives.ToString("0.0"); // always one decimal place
+        if (lives == -0.5) { 
+            livesText.text = "x0"; 
+        } else {
+            livesText.text = "x" + lives.ToString("0.0"); // always one decimal place
+        }
     }
 
     void GameOver() {
