@@ -54,7 +54,7 @@ public class OptionsManager : MonoBehaviour
         // VIDEO
 
         // fullscreen toggle
-        bool fullscreen = PlayerPrefs.GetInt("Fullscreen", 0) == 1;
+        bool fullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
         fullscreenToggle.SetStateAndStartAnimation(fullscreen);
         Screen.fullScreen = fullscreen;
 
