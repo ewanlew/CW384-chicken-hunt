@@ -2731,6 +2731,7 @@ MonoBehaviour:
   chickenFall: {fileID: 8300000, guid: 0b91f3e207b50434db64bbdec73d8e92, type: 3}
   typingChallengeStart: {fileID: 8300000, guid: b9d388bcd45f8754c94b123a52528ac9, type: 3}
   typingChallengeFail: {fileID: 8300000, guid: 45b4e698ae42381478fe93fdd33025c0, type: 3}
+  chickenBarelyMissed: {fileID: 8300000, guid: fdef513cf7afbf44c96b27767e99e966, type: 3}
 --- !u!4 &1132838377
 Transform:
   m_ObjectHideFlags: 0

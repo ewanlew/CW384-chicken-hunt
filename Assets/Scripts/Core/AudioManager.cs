@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip chickenFall; // chicken missed and falls
     public AudioClip typingChallengeStart; // challenge begins
     public AudioClip typingChallengeFail; // wrong input in challenge
+    public AudioClip chickenBarelyMissed; // barely missed chicken
 
     /**
     *   keeps one instance across the game, loads previous saved volumes on load

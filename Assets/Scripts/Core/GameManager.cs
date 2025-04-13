@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [Header("Text Objects")] 
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI finalScoreText;
+    [SerializeField] private TextMeshProUGUI lifeUpdateText;
+
 
     [Header("Init Values")] 
     [SerializeField] private int score = 0;
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isDoublePointsActive = false;
 
     public InGameLeaderboardUI leaderboardUI;
+    private Coroutine lifeTextRoutine;
 
     void Start() {
         UpdateUI(); // update score + lives display
@@ -46,8 +49,10 @@ public class GameManager : MonoBehaviour
     public void Miss(bool nearMiss = false) {
         if (nearMiss) {
             lives -= (float) 0.5;
+            ShowLifeChange((float) -0.5);
         } else {
             lives -= (float) 1;
+            ShowLifeChange((float) -1);
         }
 
         if (lives <= 0) {
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour
     public void AddLife(float amt) {
         lives += amt;
         UpdateUI(); // update HUD
+        ShowLifeChange(amt);
     }
 
     public void DoublePointsEffect() {
@@ -157,6 +163,42 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // reload current scene
+    }
+
+    private void ShowLifeChange(float amount) {
+        if (lifeUpdateText == null) return;
+
+        // stop any existing fade so we don’t overlap
+        if (lifeTextRoutine != null) StopCoroutine(lifeTextRoutine);
+
+        // set the text and colour
+        lifeUpdateText.text = amount > 0 ? $"+{amount}" : $"{amount}";
+        lifeUpdateText.color = amount > 0 ? Color.green : Color.red;
+
+        // start fade-out
+        lifeTextRoutine = StartCoroutine(FadeLifeText());
+    }
+
+    private IEnumerator FadeLifeText() {
+        float duration = 1f;
+        float elapsed = 0f;
+
+        Color startColour = lifeUpdateText.color;
+        startColour.a = 1f;
+        lifeUpdateText.color = startColour;
+
+        while (elapsed < duration) {
+            elapsed += Time.unscaledDeltaTime;
+
+            // fade alpha from 1 -> 0 over time
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            lifeUpdateText.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
+
+            yield return null;
+        }
+
+        lifeUpdateText.text = ""; // clear when done
+        lifeTextRoutine = null; // clear coroutine tracker
     }
 
     public void ReturnToMenu() {

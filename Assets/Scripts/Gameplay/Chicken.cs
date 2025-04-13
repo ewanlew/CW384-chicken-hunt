@@ -57,10 +57,10 @@ public class Chicken : MonoBehaviour
             }
         } else if (distance <= killRadius * 2f) {
             GameManager.Instance.Miss(true); // near miss
-            Debug.Log("close but missed...");
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.chickenBarelyMissed); // play barely missed sound
+
         } else {
             GameManager.Instance.Miss(false); // full miss
-            Debug.Log("missed completely...");
         }
     }
 
